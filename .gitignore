@@ -1,0 +1,3 @@
+# lines starting with '#' are considered comments.
+# ignore any directory named target (produced by Maven):
+target
