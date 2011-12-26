@@ -1,0 +1,89 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>net.sf.bluecove</groupId>
+	<artifactId>bluecove-for-osgi</artifactId>
+	<packaging>bundle</packaging>
+	<name>Bluecove for OSGi</name>
+	<version>2.1.1-SNAPSHOT</version>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+	<repositories>
+		<repository>
+			<!-- repository for Bluecove -->
+			<id>bluecove.snapshot</id>
+			<url>http://repository.pyx4j.com/maven2-snapshot</url>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
+
+	<distributionManagement>
+		<repository>
+			<id>bluecove-for-osgi-repository</id>
+			<url>file:../repository</url>
+		</repository>
+	</distributionManagement>
+
+	<dependencies>
+		<dependency>
+			<groupId>net.sf.bluecove</groupId>
+			<artifactId>bluecove</artifactId>
+			<version>2.1.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>net.sf.bluecove</groupId>
+			<artifactId>bluecove-gpl</artifactId>
+			<version>2.1.1-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.3.2</version>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.felix</groupId>
+				<artifactId>maven-bundle-plugin</artifactId>
+				<version>2.3.6</version>
+				<extensions>true</extensions>
+				<configuration>
+					<instructions>
+						<_exportcontents>
+							javax.bluetooth,
+							javax.microedition.io,
+							javax.obex
+						</_exportcontents>
+						<Import-Package>
+							!com.ibm.*,
+							!com.sun.*,
+							!org.apache.log4j,
+							!android.os,
+							*
+						</Import-Package>
+						<Embed-Dependency>
+							bluecove,
+							bluecove-gpl
+						</Embed-Dependency>
+					</instructions>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
